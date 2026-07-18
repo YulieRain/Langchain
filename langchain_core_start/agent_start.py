@@ -21,18 +21,20 @@ qwen = init_chat_model(
 agent = create_agent(model=qwen)
 
 
-# 阻塞式访问
-response = agent.invoke({
-    "messages": [{"role": "user","content": "你是谁？"}]
-})
+if __name__ == '__main__':
+    # 阻塞式访问
+    response = agent.invoke({
+        "messages": [{"role": "user","content": "你是谁？"}]
+    })
 
-# print(response)
+    # print(response)
 
 
-# 流式调用
-for token,metadata in agent.stream(
-    {"messages": [{"role": "user","content": "你是谁？"}]},
-    stream_mode="messages"
-):
-    if token.content:
-        print(token.content,end="",flush=True)
+    # 流式调用
+    for token,metadata in agent.stream(
+        {"messages": [{"role": "user","content": "你是谁？"}]},
+        stream_mode="messages"
+    ):
+        if token.content:
+            print(token.content,end="",flush=True)
+
